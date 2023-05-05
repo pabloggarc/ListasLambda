@@ -1,3 +1,5 @@
+#lang racket
+
 ; Booleanos
 (define true (lambda (x y) x))
 
@@ -411,3 +413,27 @@
                    ((par ((mcdnat (primero (absoluto r))) (primero (absoluto s)))) zero))))
 
 
+
+;; Listas
+
+(define church2N (lambda (n)
+                      ((n add1) 0)))
+(define (church2Z i)
+  ((positivo i)
+      (((primero i) add1) 0)
+      (((segundo i) sub1) 0)
+  ))
+
+(define nil (lambda (z) z))
+
+(define cons (lambda (x)
+              (lambda (y)
+                (par false (par x y)))))
+
+(define null primero)
+
+(define hd (lambda (z)
+             ((primero segundo z))))
+
+(define tl (lambda (z)
+             ((segundo segundo z))))
