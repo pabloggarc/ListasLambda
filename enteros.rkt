@@ -412,9 +412,7 @@
                  (lambda (s)
                    ((par ((mcdnat (primero (absoluto r))) (primero (absoluto s)))) zero))))
 
-
-
-;; Listas
+;; Codificación de Church a decimal
 
 (define church2N (lambda (n)
                       ((n add1) 0)))
@@ -424,16 +422,22 @@
       (((segundo i) sub1) 0)
   ))
 
+;; Listas
+
 (define nil (lambda (z) z))
 
 (define cons (lambda (x)
               (lambda (y)
-                (par false (par x y)))))
+                ((par false) ((par x) y)))))
 
 (define null primero)
 
 (define hd (lambda (z)
-             ((primero segundo z))))
+             (primero (segundo z))))
 
 (define tl (lambda (z)
-             ((segundo segundo z))))
+             (segundo (segundo z))))
+
+;; Listas de prueba
+(define L1 ((cons un) nil))
+(define L2 ((cons un)((cons zero)((cons deux)nil))))
