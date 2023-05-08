@@ -524,6 +524,10 @@
     )
 )
 
+(define concatNumList ;Concatena un número por la izquierda a una lista -> ((concatNumList L3) cinco)
+  (lambda (l)
+    (lambda (n)
+      ((cons n )l))))
 
 ;; Listas de prueba
 (define L1 ((cons un) nil))
