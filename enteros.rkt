@@ -438,7 +438,7 @@
 (define tl (lambda (z)
              (segundo (segundo z))))
 
-(define printZ
+(define printZ ;Imprime una lista de enteros
   (lambda (l) (display "[")
     ((Y (lambda (f)
       (lambda (x)
@@ -461,6 +461,11 @@
   )
 )
 
+(define printNumZ
+  (lambda (num)
+    (display (church2Z num))
+    )
+  )
 
 (define long
   (lambda (l)
@@ -556,7 +561,6 @@
   )
 
 
-
 (define append ;concatena la segunda lista al final de la primera
   (lambda (lista1) 
     (lambda (lista2)
@@ -581,6 +585,49 @@
       )
     ))
 
+
+(define maximum
+  (lambda (lista)
+    (((Y (lambda (f) ;Función recursiva 
+           (lambda (l) 
+             (lambda (maxActual)
+               (((null l) ;Si la lista es vacía
+                 (lambda (no_use)
+                   maxActual ;El maximo es el maximo que lleve guardado
+                   )
+                 (lambda (no_use) ;Si no es vacía
+                   ((f (tl l)) ((mayor (hd l)) maxActual)) ;El maximo es el mayor entre la cabeza y el maximo actual, y llamar a la función con el resto de la lista
+                   )
+                 )
+                cero)
+               ))
+           )
+         )
+      lista)
+     cero)
+    ))
+
+
+(define mayor
+    (lambda (num1)
+      (lambda (num2)
+        (((esmayorent num1)num2) ;Si el num1 es mayor que el num2
+         num1 ;Devuelvo el num1
+         num2) ;Sino, devuelvo el num2
+        )
+      )
+  )
+
+
+
+
+(define printN ;Ya que están codificados como en teoria (palito palito es 2) pues los imprimo igual
+  (lambda (n)
+    ((n (lambda (x) (string-append x "1"))) "")))
+
+
+
+
 #|
 La estructura:
 lambda (l)
@@ -600,6 +647,9 @@ lambda (l)
       )Codigo que llama a ejecutar la función anónima -> Hay que mandarle el número de parámetros correspondientes
 )
 )
+
+El codigo recursivo sería:
+((f nuevoParametro1)nuevoParametro2)
 
 Avisos:
 (((Y (lambda (f) -> Delante de Y hay tantos parentesis como parámetros en la función anónima más 1 (el de englobar todo)
