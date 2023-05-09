@@ -461,7 +461,7 @@
   )
 )
 
-(define printNumZ
+(define printNumZ ;Imprime un numero entero
   (lambda (num)
     (display (church2Z num))
     )
@@ -599,12 +599,33 @@
                    ((f (tl l)) ((mayor (hd l)) maxActual)) ;El maximo es el mayor entre la cabeza y el maximo actual, y llamar a la función con el resto de la lista
                    )
                  )
-                cero)
+                cero);Inicializo la variable que no usamos con un cero
                ))
            )
          )
-      lista)
-     cero)
+      lista) ;Inicializo la variable l
+     -veinte) ;Inicializo el maxActual con el valor más pequeño existente definido
+    ))
+
+(define minimum
+  (lambda (lista)
+    (((Y (lambda (f) ;Función recursiva 
+           (lambda (l) 
+             (lambda (minActual)
+               (((null l) ;Si la lista es vacía
+                 (lambda (no_use)
+                   minActual ;El minimo es el maximo que lleve guardado
+                   )
+                 (lambda (no_use) ;Si no es vacía
+                   ((f (tl l)) ((menor (hd l)) minActual)) ;El minimo es el menor entre la cabeza y el menor actual, y llamar a la función con el resto de la lista
+                   )
+                 )
+                cero) ;Inicializo la variable que no usamos con un cero
+               ))
+           )
+         )
+      lista) ;Inicializo la variable l
+     veinte) ;Inicializo el minActual con el valor más alto existente definido
     ))
 
 
@@ -618,14 +639,21 @@
       )
   )
 
+(define menor
+  (lambda (num1)
+    (lambda (num2)
+      (((esmenorent num1)num2)
+       num1
+       num2)
+      )
+    )
+  )
 
 
 
 (define printN ;Ya que están codificados como en teoria (palito palito es 2) pues los imprimo igual
-  (lambda (n)
+  (lambda (n) ;(printN cinq) -> "11111"
     ((n (lambda (x) (string-append x "1"))) "")))
-
-
 
 
 #|
