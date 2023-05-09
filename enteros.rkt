@@ -529,7 +529,90 @@
     (lambda (n)
       ((cons n )l))))
 
+
+
+(define reverse
+  (lambda (l) ;Le mando la lista
+    (((Y (lambda (f)
+          (lambda (lista) ;La lista 
+            (lambda (resultado) ;Donde voy a ir guardando el resultado
+              (((null lista) ;Si la lista es vacía devuelvo el resultado
+                (lambda (no_use)
+                  resultado
+                  )
+                (lambda (no_use) ;Si no es vacía
+                  ;((f (tl lista))((concatNumList resultado)(hd lista)))
+                  ((f (tl lista))((cons (hd lista))resultado)) ;LLamo recursivamente con la cola de la lista y al resultado le concateno por la izquierda la cabeza de la lista
+                  
+                  )
+                )
+               cero) ;Inicializo la variable no_use que no voy a usar
+              )
+            )
+          ))
+      l) ;Inicializo la lista con la lista pasada
+    nil) ;Inicializo el resultado a nil porque todavía no hay nada
+    )
+  )
+
+
+
+(define append ;concatena la segunda lista al final de la primera
+  (lambda (lista1) 
+    (lambda (lista2)
+      (((Y (lambda (f)
+             (lambda (l1) 
+               (lambda (l2)
+                 (((null l1) ;Si la segunda está vacía
+                   (lambda (no_use)
+                     l2 ;Devuelvo la primera
+                     )
+                   (lambda (no_use) ;sino
+                    
+                     ((cons (hd l1))((f (tl l1))l2)) ;pongo la cabeza de la segunda a lo que quede de llamar recurisvamente -> lista1 
+                     
+                     )
+                   )
+                  cero) ;Inicializo variable no_use a cero  -> NO la voy a usar
+                 ))
+             ))
+        lista1) ;Inicializo el valor de l1 por lista1
+       lista2) ;Inicializo el valor de l2 por lista2
+      )
+    ))
+
+#|
+La estructura:
+lambda (l)
+ lambda (x)
+  lambda (...) Para que coja el número de parametros, l , x son 2 parametros que necesita la funcion
+
+((Y (lambda (f) ;Funcion anonima
+     (lambda (parametro1) ;parametros que se le pasan
+        (lambda (parametro2)
+          (condicion1)
+            (lambda (no_use)
+            (codigoCondicion1)
+             )
+            (lambda (no_use)
+            (codigoCondicion2) ;Codigo si no se cumple la condicion1
+             )
+      )Codigo que llama a ejecutar la función anónima -> Hay que mandarle el número de parámetros correspondientes
+)
+)
+
+Avisos:
+(((Y (lambda (f) -> Delante de Y hay tantos parentesis como parámetros en la función anónima más 1 (el de englobar todo)
+Delante de la condición de dentro hay tantos paréntesis como condiciones más 1 (el de englobar todo)
+Las variables anónimas en la función hay que inicializarlas aunque no se vayan a usar
+|#
+
+
+
+
+
 ;; Listas de prueba
 (define L1 ((cons un) nil))
 (define L2 ((cons un)((cons zero)((cons deux)nil))))
 (define L3 ((cons uno)((cons cero)((cons dos)nil))))
+(define L4 ((cons uno)((cons dos)((cons tres)((cons cuatro)nil)))))
