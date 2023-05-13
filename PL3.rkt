@@ -63,7 +63,7 @@
   )
 
 
-(define long
+(define long ;(printNum (long L3))
   (lambda (l)
       ((Y (lambda (f)
          (lambda (x)
@@ -82,7 +82,7 @@
     )
 )
 
-(define in
+(define in ; (display ((in L3)dos)) ó ((in L3)dos)
   (lambda (l)
     (lambda (y)
       ((Y (lambda (f)
@@ -245,7 +245,7 @@
     )
   )
 
-(define apariciones
+(define apariciones ;(printNum ((apariciones L4)dos)) -> Si se devolviera cero cuando la lista es vacía habría que usar printNumZ
   (lambda (l)  ;lista
     (lambda (y)  ;elemento
       ((Y (lambda (f)
@@ -269,7 +269,7 @@
   )
 )
 
-(define sumaVectores
+(define sumaVectores ;(printLista ((sumaVectores L3)L4))
   (lambda (lista1) ;lista1
     (lambda (lista2) ;lista2
       (((Y (lambda (f)
@@ -295,7 +295,7 @@
   )
  )
 
-(define restaVectores
+(define restaVectores ;(printLista ((restaVectores L3)L4))
   (lambda (lista1) ;lista1
     (lambda (lista2) ;lista2
       (((Y (lambda (f)
@@ -321,7 +321,7 @@
   )
  )
 
-(define multVectores
+(define multVectores ;(printLista ((multVectores L3)L4))
   (lambda (lista1) ;lista1
     (lambda (lista2) ;lista2
       (((Y (lambda (f)
@@ -379,6 +379,53 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 |#
 
 
+(define toma ;(printLista ((toma dos)L4)
+  (lambda (numero) 
+    (lambda (lista)
+      (((Y (lambda (f)
+             (lambda (n) 
+               (lambda (l)
+                 (((esceroent n) ;Si la lista esta vacia
+                   (lambda (no_use)
+                     nil 
+                     )
+                   (lambda (no_use) ;sino
+                    
+                     ((cons (hd l))((f ((restaent n)uno))(tl l))) ;Concateno la cabeza con n números de la cola
+                     
+                     )
+                   )
+                  cero) ;Inicializo variable no_use a cero  -> NO la voy a usar
+                 ))
+             ))
+        numero) 
+       lista) 
+      )
+    ))
+
+(define deja ;(printLista ((deja)dos)L4)
+  (lambda (numero) 
+    (lambda (lista)
+      (((Y (lambda (f)
+             (lambda (n) 
+               (lambda (l)
+                 (((esceroent n) ;Si la lista esta vacia
+                   (lambda (no_use)
+                     l 
+                     )
+                   (lambda (no_use) ;sino
+                    
+                     ((f ((restaent n)uno))(tl l)) ;Cojo solo números a partir del n primero
+                     
+                     )
+                   )
+                  cero) ;Inicializo variable no_use a cero  -> NO la voy a usar
+                 ))
+             ))
+        numero) 
+       lista) 
+      )
+    ))
 
 
 
