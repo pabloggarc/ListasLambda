@@ -679,7 +679,7 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 (printLista((restaVectores LA)LB))
 
 (display "\nLa multiplicacion de las dos listas es: " )
-(printLista((productoVectores LA)LB))
+(printLista((multVectores LA)LB))
 
 (display "\nSi susituimos en la lista A los 6 por 8 nos queda: " )
 (printLista(((sustituir LA)seis)ocho))
