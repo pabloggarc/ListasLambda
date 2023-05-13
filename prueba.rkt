@@ -1,0 +1,9 @@
+#lang racket
+(require "PL3.rkt")
+(require "enteros.rkt")
+(define L1 ((cons uno)((cons dos)((cons tres)((cons cuatro)((cons cinco)((cons seis)nil)))))))
+(define L2 ((cons nueve)((cons dos)((cons cinco)((cons uno)((cons tres)((cons dos)nil)))))))
+(display "PRUEBA\n")
+
+(display "La lista 1 es: ")
+(display (printLista L1))    
