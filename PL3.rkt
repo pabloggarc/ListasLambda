@@ -436,26 +436,3 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 (define L4 ((cons uno)((cons dos)((cons tres)((cons cuatro)nil)))))
 (define L5 ((cons dos)((cons dos)((cons uno)nil))))
 
-
-;Ejecución del programa:
-(define ejecutar 
-  (begin ;A partir de aquí podemos poner todas las funciones del programa para que ejecuten directamente
-   ;Podemos ponerle nosotros los valores que queremos predeterminados para cada función
-
-     ;(display (format "Suma de los valores de la lista: ~a \n"  L3)) El formato este sirve para incluir el valor L3 como texto puro (como una lista es un procedimiento no se puede pero con numeros se podría
-    (display "Suma de los valores de la lista L3: ")
-    (printLista L3)
-    (printNumZ (sumaL L3)) 
-    (display "\nSuma de los vectores L3 y L4: \n")
-    
-    (printLista L3) (printLista L4)
-    (display "Resultado: ")
-    (printLista ((sumaVectores L3)L4))
-    (display "\n")
-
-    ;Aquí podemos poner todas las operaciones que queramos directamente
-    ;Gracias al begin se ejecuta solo directamente
-
-    
-    )
-  )
