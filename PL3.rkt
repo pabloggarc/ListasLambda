@@ -27,7 +27,7 @@
 (define tl (lambda (z)
              (segundo (segundo z))))
 
-(define printZ ;Imprime una lista de enteros
+(define printLista ;Imprime una lista de enteros
   (lambda (l) (display "[")
     ((Y (lambda (f)
       (lambda (x)
@@ -56,7 +56,7 @@
     )
   )
 
-(define printNumN
+(define printNum
   (lambda (num)
     (display (church2N num))
     )
@@ -246,18 +246,18 @@
   )
 
 (define apariciones
-  (lambda (l)
-    (lambda (y)
+  (lambda (l)  ;lista
+    (lambda (y)  ;elemento
       ((Y (lambda (f)
          (lambda (x)
-          (((null x)
+          (((null x) ;si la lista esta vacia no habra ninguna aparicion
             (lambda (no_use)
               zero
             )
-            (lambda (no_use)
-              (((esigualent y) (hd x))
+            (lambda (no_use) ;sino
+              (((esigualent y) (hd x)) ;si la cabeza de la lista es el elemento que se esta buscando se suma 1 y se llama recursivamente
                 (sucesor (f (tl x)))
-                (f (tl x))  ; si no, y pertenece a cola?
+                (f (tl x)) ;en caso contrario se devuelve el resultado de la funcion recursiva aplicada a la cola de la lista
               )
             )
           )
@@ -268,6 +268,86 @@
     )
   )
 )
+
+(define sumaVectores
+  (lambda (lista1) ;lista1
+    (lambda (lista2) ;lista2
+      (((Y (lambda (f)
+         (lambda (l1)
+           (lambda (l2)
+          (((null l1)  ;si la lista 1 es vacía habrá que devolver la lista 2
+            (lambda (no_use)
+              l2
+            )
+            (lambda (no_use)
+              ((null l2)  ;si la lista 2 es vacía habrá que devolver la lista 1
+                l1
+                ((cons ((sument (hd l1))(hd l2)))((f (tl l1))(tl l2)))  ;en caso de que haya elementos en las dos listas, habrá que devolver una nueva lista con la suma de las cabezas de ambas y la suma de las colas
+              )
+            )
+          )
+            zero)
+        ))
+      ))
+        lista1) ;lista1 <- l1
+       lista2); ;lista2 <- l2
+    )
+  )
+ )
+
+(define restaVectores
+  (lambda (lista1) ;lista1
+    (lambda (lista2) ;lista2
+      (((Y (lambda (f)
+         (lambda (l1)
+           (lambda (l2)
+          (((null l1)  ;si la lista 1 es vacía habrá que devolver la lista 2
+            (lambda (no_use)
+              l2
+            )
+            (lambda (no_use)
+              ((null l2)  ;si la lista 2 es vacía habrá que devolver la lista 1
+                l1
+                ((cons ((restaent (hd l1))(hd l2)))((f (tl l1))(tl l2)))  ;en caso de que haya elementos en las dos listas, habrá que devolver una nueva lista con la suma de las cabezas de ambas y la suma de las colas
+              )
+            )
+          )
+            zero)
+        ))
+      ))
+        lista1) ;lista1 <- l1
+       lista2); ;lista2 <- l2
+    )
+  )
+ )
+
+(define multVectores
+  (lambda (lista1) ;lista1
+    (lambda (lista2) ;lista2
+      (((Y (lambda (f)
+         (lambda (l1)
+           (lambda (l2)
+          (((null l1)  ;si la lista 1 es vacía habrá que devolver la lista 2
+            (lambda (no_use)
+              l2
+            )
+            (lambda (no_use)
+              ((null l2)  ;si la lista 2 es vacía habrá que devolver la lista 1
+                l1
+                ((cons ((prodent (hd l1))(hd l2)))((f (tl l1))(tl l2)))  ;en caso de que haya elementos en las dos listas, habrá que devolver una nueva lista con la suma de las cabezas de ambas y la suma de las colas
+              )
+            )
+          )
+            zero)
+        ))
+      ))
+        lista1) ;lista1 <- l1
+       lista2); ;lista2 <- l2
+    )
+  )
+ )
+
+
 
 #|
 La estructura:
@@ -303,8 +383,8 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 
 
 ;; Listas de prueba
-(define L1 ((cons un) nil))
-(define L2 ((cons un)((cons zero)((cons deux)nil))))
+(define L1 ((cons uno) nil))
+(define L2 ((cons uno)((cons cero)((cons dos)nil))))
 (define L3 ((cons uno)((cons cero)((cons dos)nil))))
 (define L4 ((cons uno)((cons dos)((cons tres)((cons cuatro)nil)))))
 (define L5 ((cons dos)((cons dos)((cons uno)nil))))
