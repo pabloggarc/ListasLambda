@@ -245,6 +245,29 @@
     )
   )
 
+(define apariciones
+  (lambda (l)
+    (lambda (y)
+      ((Y (lambda (f)
+         (lambda (x)
+          (((null x)
+            (lambda (no_use)
+              zero
+            )
+            (lambda (no_use)
+              (((esigualent y) (hd x))
+                (sucesor (f (tl x)))
+                (f (tl x))  ; si no, y pertenece a cola?
+              )
+            )
+          )
+            zero)  ; no_use <- x
+        )
+      ))
+        l) ; x <- l
+    )
+  )
+)
 
 #|
 La estructura:
@@ -284,3 +307,4 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 (define L2 ((cons un)((cons zero)((cons deux)nil))))
 (define L3 ((cons uno)((cons cero)((cons dos)nil))))
 (define L4 ((cons uno)((cons dos)((cons tres)((cons cuatro)nil)))))
+(define L5 ((cons dos)((cons dos)((cons uno)nil))))
