@@ -205,7 +205,7 @@
            )
          )
       lista) ;l <- lista
-     (hd lista)) ;Inicializo el maxActual con el valor más pequeño existente definido
+     (hd lista)) ;Inicializo el maxActual con la cabeza de la lista
     ))
 
 ;Elemento minimo de una lista
@@ -227,7 +227,7 @@
            )
          )
       lista) ;l <- lista
-     (hd lista)) ;Inicializo el minActual con el valor más alto existente definido
+     (hd lista)) ;Inicializo el minActual con el mínimo de la lista
     ))
 
 
@@ -498,6 +498,13 @@
        lista) ;l <- lista 
       )
     ))
+
+(define productoEscalar
+  (lambda (l1)
+       (lambda (l2)
+                    (sumaL ((multVectores l1)l2))
+                    )  
+   ))
   
 (define menu
   (lambda (no_use)
@@ -521,95 +528,16 @@
     (display "16. Ordenar la lista de menor a mayor -> Introduce (printLista(ordenarMenorMayor L)), siendo L la lista.\n")
     (display "17. Ordenar la lista de mayor a menor -> Introduce (printLista(ordenarMayorMenor L)), siendo L la lista.\n")
     (display "18. Coger los N primeros elementos de una lista. Introduce (printLista((tomaNElementos N)L)), siendo N el número de elementos (escrito en letras) que se quieren coger y L la lista.\n")
-    (display "19. Dejar los N primeros elementos de una lista. Introduce (printLista((dejaNElementos N)L)), siendo N el número de elementos (escrito en letras) que se quieren dejar y L la lista.\n")
+    (display "19. Quitar los N primeros elementos de una lista. Introduce (printLista((dejaNElementos N)L)), siendo N el número de elementos (escrito en letras) que se quieren dejar y L la lista.\n")
+    (display "20. Calcular el producto escalar de dos listas. Introduce (printNumZ((productoEscalar L1)L2)), siendo L1 y L2 dos listas.\n")
     (display "NOTA: Los números enteros definidos son del -veinte al veinte por lo que si se quieren usar otros distintos, habrá que definirlos primero de la siguiente forma:\n")
     (display "Para el veinte: (define vingt (sucesor dix-neuf)) y (define veinte ((par vingt) zero))\n")
     (display "Para el -veinte: (define -veinte ((par zero) vingt))\n")
-    (display "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n")
+    (display "Para desplegar este menú de nuevo, escribir (menu cero)\n")
+    (display "-----------------------------------------------------------------------------------------------------------------------------\n\n")
     )
    )
   )
-
-
-#|
-La estructura:
-lambda (l)
- lambda (x)
-  lambda (...) Para que coja el número de parametros, l , x son 2 parametros que necesita la funcion
-
-((Y (lambda (f) ;Funcion anonima
-     (lambda (parametro1) ;parametros que se le pasan
-        (lambda (parametro2)
-          (condicion1)
-            (lambda (no_use)
-            (codigoCondicion1)
-             )
-            (lambda (no_use)
-            (codigoCondicion2) ;Codigo si no se cumple la condicion1
-             )
-      )Codigo que llama a ejecutar la función anónima -> Hay que mandarle el número de parámetros correspondientes
-)
-)
-
-El codigo recursivo sería:
-((f nuevoParametro1)nuevoParametro2)
-
-Avisos:
-(((Y (lambda (f) -> Delante de Y hay tantos parentesis como parámetros en la función anónima más 1 (el de englobar todo)
-Delante de la condición de dentro hay tantos paréntesis como condiciones más 1 (el de englobar todo)
-Las variables anónimas en la función hay que inicializarlas aunque no se vayan a usar
-|#
-
-
-(define toma ;(printLista ((toma dos)L4)
-  (lambda (numero) 
-    (lambda (lista)
-      (((Y (lambda (f)
-             (lambda (n) 
-               (lambda (l)
-                 (((esceroent n) ;Si la lista esta vacia
-                   (lambda (no_use)
-                     nil 
-                     )
-                   (lambda (no_use) ;sino
-                    
-                     ((cons (hd l))((f ((restaent n)uno))(tl l))) ;Concateno la cabeza con n números de la cola
-                     
-                     )
-                   )
-                  cero) ;Inicializo variable no_use a cero  -> NO la voy a usar
-                 ))
-             ))
-        numero) 
-       lista) 
-      )
-    ))
-
-(define deja ;(printLista ((deja)dos)L4)
-  (lambda (numero) 
-    (lambda (lista)
-      (((Y (lambda (f)
-             (lambda (n) 
-               (lambda (l)
-                 (((esceroent n) ;Si la lista esta vacia
-                   (lambda (no_use)
-                     l 
-                     )
-                   (lambda (no_use) ;sino
-                    
-                     ((f ((restaent n)uno))(tl l)) ;Cojo solo números a partir del n primero
-                     
-                     )
-                   )
-                  cero) ;Inicializo variable no_use a cero  -> NO la voy a usar
-                 ))
-             ))
-        numero) 
-       lista) 
-      )
-    ))
-
-
 
 ;; Listas de prueba
 (define L1 ((cons uno) nil))
@@ -620,7 +548,7 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 
 
 ;;Ejecución de prueba de las funcionalidades
-(define LA ((cons uno)((cons dos)((cons tres)((cons cuatro)((cons cinco)((cons seis)nil)))))))
+(define LA ((cons -uno)((cons dos)((cons -tres)((cons -cuatro)((cons cinco)((cons seis)nil)))))))
 (define LB ((cons nueve)((cons dos)((cons cinco)((cons uno)((cons tres)((cons dos)nil)))))))
 (menu zero)
 (display "PRUEBA\n")
@@ -635,9 +563,9 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 (display "\nLa longitud de la lista B es: ")
 (printNum(long LB))
 
-(display "\nEl numero 7 está en la lista A:\n")
+(display "\nEl número 7 está en la lista A:\n")
 ((in LA)siete)
-(display "\nEl numero 2 está en la lista A:\n")
+(display "\nEl número 2 está en la lista B:\n")
 ((in LB)dos)
 
 (display "\nLa suma de los elementos de la lista A es: " )
@@ -647,7 +575,7 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 
 (display "\nAñadir el 1 al principio de la lista A: " )
 (printLista((concatNumList LA)uno))
-(display "\nAñadir el 3 al principio de la lista A: " )
+(display "\nAñadir el 3 al principio de la lista B: " )
 (printLista((concatNumList LB)tres))
 
 (display "\nLista A invertida: " )
@@ -657,22 +585,22 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 
 (display "\nConcatenar a la lista A la lista B: " )
 (printLista((append LA)LB))
-(display "\nConcatenar a la lista A la lista B: " )
+(display "\nConcatenar a la lista B la lista A: " )
 (printLista((append LB)LA))
 
-(display "\nEl maximo de la lista A es: " )
+(display "\nEl máximo de la lista A es: " )
 (printNumZ(maximum LA))
-(display "\nEl maximo de la lista B: " )
+(display "\nEl máximo de la lista B: " )
 (printNumZ(maximum LB))
 
-(display "\nEl minimo de la lista A es: " )
+(display "\nEl mínimo de la lista A es: " )
 (printNumZ(minimum LA))
-(display "\nEl minimo de la lista B: " )
+(display "\nEl mínimo de la lista B: " )
 (printNumZ(minimum LB))
 
-(display "\nNumero de 6 que hay en la lista A: " )
+(display "\nNúmero de 6 que hay en la lista A: " )
 (printNum((apariciones LA)seis))
-(display "\nNumero de 2 que hay en la lista B: " )
+(display "\nNúmero de 2 que hay en la lista B: " )
 (printNum((apariciones LB)dos))
 
 (display "\nLa suma de las dos listas es: " )
@@ -684,9 +612,9 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 (display "\nLa multiplicacion de las dos listas es: " )
 (printLista((multVectores LA)LB))
 
-(display "\nSi susituimos en la lista A los 6 por 8 nos queda: " )
+(display "\nSi sustituimos en la lista A los 6 por 8 nos queda: " )
 (printLista(((sustituir LA)seis)ocho))
-(display "\nSi susituimos en la lista B los 2 por 11 nos queda: " )
+(display "\nSi sustituimos en la lista B los 2 por 11 nos queda: " )
 (printLista(((sustituir LB)dos)once))
 
 (display "\nSi eliminamos el primer 5 de la lista A nos queda: " )
@@ -704,13 +632,16 @@ Las variables anónimas en la función hay que inicializarlas aunque no se vayan
 (display "\nLa lista B ordenada de mayor a menor es: " )
 (printLista(ordenarMayorMenor LB))
 
-(display "\nSi dejamos los tres primeros elementos de la lista A nos queda: ")
+(display "\nSi quitamos los tres primeros elementos de la lista A nos queda: ")
 (printLista((dejaNElementos tres)LA))
-(display "\nSi dejamos los dos primeros elementos de la lista B nos queda: ")
+(display "\nSi quitamos los dos primeros elementos de la lista B nos queda: ")
 (printLista((dejaNElementos dos)LB))
 
 (display "\nSi tomamos los tres primeros elementos de la lista A nos queda: ")
 (printLista((tomaNElementos tres)LA))
 (display "\nSi tomamos los dos primeros elementos de la lista B nos queda: ")
 (printLista((tomaNElementos dos)LB))
+
+(display "\nSi tomamos las listas A y B, su producto escalar es: ")
+(printNumZ((productoEscalar LA)LB))
 
